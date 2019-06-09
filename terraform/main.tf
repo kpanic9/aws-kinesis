@@ -2,6 +2,7 @@ provider "aws" {
     region = "ap-southeast-2"
     access_key  = "xxxxxxxxxx"
     secret_key = "xxxxxxxxxxxxxxxxxxxxxxxxx"
+
 	skip_credentials_validation = true
     skip_metadata_api_check = true
     s3_force_path_style = true
@@ -14,6 +15,7 @@ provider "aws" {
         lambda = "http://localhost:4574"
         iam = "http://localhost:4593"
 	}
+
 }
 
 
@@ -34,7 +36,8 @@ resource "aws_kinesis_stream" "app_stream" {
 
 # aws s3 bucket for storing kinesis stream events
 resource "aws_s3_bucket" "kinesis_event_bucket" {
-    bucket = "kinesis-stream-test-bucket-awqwdefevf"
+    # random string at the end is because s3 is a global resource
+    bucket = "kinesis-stream-events-bucket-awqwdefevf"
     acl = "private"
 
     tags = {
